@@ -1,1 +1,3 @@
-This step uses the supplied cave wall as the base image and adds one new pigment mark without removing earlier work.
+The first step used the supplied cave wall as the base image and added its Pepe figure.
+This step restored the first painted line-1 wall from the SHA-256 artifact in `dist/line-1/01.json` because later numbered records were unpainted slots and no local wall PNG was present. It used that painting as the exact base, edited a new pigment mark on open rock, and kept the older Pepe and framing.
+The bounded snapshot tool builds on the original `line-1/tools/rpc_snapshot.py` interface and answers the public-read safety issue described in `gathering/REPORT.md`. It uses the real ZTO token address for its live read example.
