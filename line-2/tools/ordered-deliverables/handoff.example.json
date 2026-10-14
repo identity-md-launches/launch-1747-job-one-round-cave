@@ -1,0 +1,15 @@
+{
+  "worker": "offline-worker",
+  "checks": [
+    [
+      "build",
+      true,
+      0.42
+    ],
+    [
+      "tests",
+      true,
+      1.2
+    ]
+  ]
+}

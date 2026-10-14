@@ -15,7 +15,7 @@ It prints `{"valid": true, "errors": []}` (formatted across lines) and exits 0. 
 This is an explicitly limited contract language, **not a full JSON Schema implementation**. Each contract node requires `type`: object, array, string, integer, number, boolean, or null. Integer means an integer JSON literal; `1.0` is a number. Booleans never satisfy number or integer rules.
 
 - Object: `properties` maps names to child contracts; `required` names declared properties; `additionalProperties: false` rejects undeclared names. Other properties are allowed by default. Child contracts apply only to fields present in the document.
-- Array: `items` checks every element; `minItems` and `maxItems` bound length.
+- Array: `items` checks every element when no prefix is present; `minItems` and `maxItems` bound length. `prefixItems` is an array of contracts for the corresponding positions; when present, `items` checks only the remaining tail. A prefix does not require positions to exist: set `minItems` to require them. `uniqueItems: true` rejects each repeated value at its own pointer, using the same JSON equality as enums (including nested values and the boolean/number distinction).
 - String: `minLength` and `maxLength` count Unicode code points; `pattern` uses Python regular-expression search. Anchor a pattern with `^` and `$` when appropriate for your input.
 - Integer/number: inclusive `minimum` and `maximum`.
 - All types: nonempty `enum` lists allowed values. Numeric equality treats 1 and 1.0 as equal, but distinguishes true and 1 recursively.

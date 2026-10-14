@@ -1,0 +1,26 @@
+{
+  "wall": {
+    "format": "PNG",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGB"
+  },
+  "preview": {
+    "format": "JPEG",
+    "width": 512,
+    "height": 512
+  },
+  "previewBytes": 57545,
+  "changedPixels": 94180,
+  "preservedPixels": 1478336,
+  "preservation": "Every pixel outside x=725..1114, y=270..519 matches the downloaded ancestor exactly. This unused region does not intersect its painting.",
+  "newRecord": 22,
+  "numbering": "21 inherited JSON files include 20 unpainted slots; all are unchanged. Count plus one is 22.",
+  "tests": {
+    "inherited": 10,
+    "ordered": 13,
+    "passed": 23
+  },
+  "unmetVisualRequirements": [],
+  "visualReview": "Full wall inspected: earth pigments, wide mouth and heavy-lidded Pepe eyes, no visible hands or handprints, no text or prohibited symbols. Structural checks are local, not independent certification."
+}

@@ -9,7 +9,7 @@ from pathlib import Path
 
 KEYS = {"type", "required", "properties", "additionalProperties", "items",
         "minItems", "maxItems", "minLength", "maxLength", "minimum", "maximum",
-        "enum", "pattern"}
+        "enum", "pattern", "prefixItems", "uniqueItems"}
 TYPES = {"object", "array", "string", "integer", "number", "boolean", "null"}
 
 
@@ -49,7 +49,7 @@ def prepare(c, path=""):
         fail("type must name one supported JSON type")
     permitted = {"type", "enum"}
     permitted |= {"object": {"properties", "required", "additionalProperties"},
-                  "array": {"items", "minItems", "maxItems"},
+                  "array": {"items", "minItems", "maxItems", "prefixItems", "uniqueItems"},
                   "string": {"minLength", "maxLength", "pattern"},
                   "number": {"minimum", "maximum"},
                   "integer": {"minimum", "maximum"}}.get(t, set())
@@ -89,6 +89,13 @@ def prepare(c, path=""):
             prepare(child, pointer(path, k))
     if "items" in c:
         prepare(c["items"], pointer(path, "items"))
+    if "prefixItems" in c:
+        if not isinstance(c["prefixItems"], list):
+            fail("prefixItems must be an array of contracts")
+        for i, child in enumerate(c["prefixItems"]):
+            prepare(child, pointer(pointer(path, "prefixItems"), i))
+    if "uniqueItems" in c and type(c["uniqueItems"]) is not bool:
+        fail("uniqueItems must be boolean")
     return c
 
 
@@ -125,8 +132,19 @@ def validate(value, c, path=""):
         if t == "string" and "pattern" in c and re.search(c["pattern"], value) is None:
             add("pattern", "does not match the required pattern")
         if t == "array" and "items" in c:
-            for i, v in enumerate(value):
+            for i in range(len(c.get("prefixItems", [])), len(value)):
+                v = value[i]
                 errors.extend(validate(v, c["items"], pointer(path, i)))
+        if t == "array":
+            for i, child in enumerate(c.get("prefixItems", [])):
+                if i < len(value):
+                    errors.extend(validate(value[i], child, pointer(path, i)))
+            if c.get("uniqueItems", False):
+                for i, v in enumerate(value):
+                    earlier = next((j for j in range(i) if same(v, value[j])), None)
+                    if earlier is not None:
+                        add("uniqueItems", f"duplicates item at {pointer(path, earlier)}",
+                            pointer(path, i))
     elif t in ("number", "integer"):
         for k, fails in (("minimum", lambda x: value < x), ("maximum", lambda x: value > x)):
             if k in c and fails(c[k]):
