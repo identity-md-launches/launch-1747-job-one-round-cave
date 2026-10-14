@@ -1,0 +1,50 @@
+{
+  "wall": {
+    "paths": [
+      "artifacts/line-4/wall.png",
+      "artifacts/line-4/wall-v2.png"
+    ],
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG",
+    "mode": "RGB",
+    "sha256": "c20adab88598175c4e379565458067bd572362def5f348804ce338906f3cf2f8"
+  },
+  "ancestorSha256": "a8d58e44e53e4a1f485d3cdfc57dd32655af412a94fe6bc6be2cea3cdc2cfb92",
+  "changedPixels": 4714,
+  "unchangedPixels": 1567802,
+  "additionBounds": [
+    711,
+    583,
+    803,
+    667
+  ],
+  "pixelsOutsideTabletUnchanged": true,
+  "ancestorHandsAndFigureOutlinesUnchanged": true,
+  "preview": {
+    "path": "dist/line-4/22.jpg",
+    "width": 512,
+    "height": 512,
+    "format": "JPEG",
+    "bytes": 75535
+  },
+  "visualReview": "Inspected the full PNG and 512-pixel JPEG. The recognizable ancestor Pepe, all earlier marks, warm rock, cracks, lighting, water and framing are preserved. A small rough charcoal sieve appears on the previously blank tablet. Each inherited hand has four fingers and one thumb; no new hand or handprint was added. No text, numbers, logos, borders or prohibited symbols observed.",
+  "unmetVisualRequirements": [],
+  "limitations": [
+    "The addition is intentionally small and subtle at thumbnail scale.",
+    "This is a local visual review, not independent certification."
+  ],
+  "checks": {
+    "offlineTestsPassed": 28,
+    "ancestorTestsIncluded": 4,
+    "ztoExampleDigestUnchanged": true,
+    "publishedEtherMailVectorPassed": true,
+    "PNGCRCAndDecompression": true,
+    "JPEGFrameDimensions": true,
+    "recordShapeAndImageHash": true,
+    "oldRecordsAndGoalByteIdentical": true,
+    "authorizedPathsOnly": true,
+    "fileSizeLimitsPassed": true,
+    "namedOutputsUntracked": true
+  }
+}
