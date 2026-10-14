@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline structural checks for Water's first gathering; no dependencies."""
+"""Offline structural checks for Water's current gathering; no dependencies."""
 import hashlib
 import json
 import struct
@@ -82,49 +82,87 @@ def jpeg_info(path):
 
 
 def main():
-    wall = ROOT / "artifacts/gathering/wall.png"
-    preview = ROOT / "dist/gathering/01.jpg"
+    number = 2
+    wall = ROOT / "artifacts/gathering/wall-v2.png"
+    preview = ROOT / f"dist/gathering/{number:02}.jpg"
     png, jpeg = png_info(wall), jpeg_info(preview)
+    assert wall.read_bytes() == (ROOT / 'artifacts/gathering/wall.png').read_bytes()
     assert (png["width"], png["height"]) == (1254, 1254)
     assert (jpeg["width"], jpeg["height"]) == (512, 512)
-    r = json.loads((ROOT / "dist/gathering/01.json").read_text())
+    r = json.loads((ROOT / f"dist/gathering/{number:02}.json").read_text())
     assert set(r) == {"name", "image", "attributes"}
     assert r["image"] == "https://api.imd.fun/artifacts/" + hashlib.sha256(wall.read_bytes()).hexdigest()
     attrs = r["attributes"]
     assert [a["trait_type"] for a in attrs] == ["Cave", "Wall", "Number", "Left behind", "Meaning", "One thing"]
     assert all(set(a) == {"trait_type", "value"} for a in attrs)
-    assert [attrs[i]["value"] for i in (0, 1, 2, 5)] == ["Water", "Gathering", 1, "Gathering"]
+    assert [attrs[i]["value"] for i in (0, 1, 2, 5)] == ["Water", "Gathering", number, "Gathering"]
     assert type(attrs[2]["value"]) is int
     assert all(a["value"] for a in attrs)
     pending = {"name": "Not painted yet", "image": BARE,
                "attributes": [{"trait_type": "Cave", "value": "Water"}]}
     folders = [f"line-{n}" for n in range(1, 5)] + ["gathering"]
+    expected, expected_images = [], []
+    painted_count = pending_count = 0
     for folder in folders:
         directory = ROOT / "dist" / folder
-        assert len(list(directory.glob("[0-9][0-9].json"))) == 21
-        for number in range(2, 22):
-            assert json.loads((directory / f"{number:02}.json").read_text()) == pending
-            assert not (directory / f"{number:02}.jpg").exists()
+        records = [(p, json.loads(p.read_text())) for p in directory.glob('[0-9][0-9].json')]
+        records.sort(key=lambda item: int(item[0].stem), reverse=True)
+        painted = [(p, r) for p, r in records if r['name'] != 'Not painted yet']
+        waiting = [(p, r) for p, r in records if r['name'] == 'Not painted yet']
+        painted_count += len(painted)
+        pending_count += len(waiting)
+        assert all((directory / f'{n:02}.json').exists() for n in range(1, 22))
+        for path, record in painted + waiting:
+            expected.append(path.relative_to(ROOT / 'dist').as_posix())
+            assert set(record) == {'name', 'image', 'attributes'}
+            if record['name'] == 'Not painted yet':
+                assert record == pending and not path.with_suffix('.jpg').exists()
+                expected_images.append(record['image'])
+            else:
+                values = {a['trait_type']: a['value'] for a in record['attributes']}
+                assert list(values) == ['Cave', 'Wall', 'Number', 'Left behind', 'Meaning', 'One thing']
+                assert values['Cave'] == 'Water'
+                assert values['Wall'] == ('Gathering' if folder == 'gathering' else 'Line ' + folder[-1])
+                assert type(values['Number']) is int and values['Number'] == int(path.stem)
+                info = jpeg_info(path.with_suffix('.jpg'))
+                assert (info['width'], info['height']) == (512, 512)
+                expected_images.append(path.with_suffix('.jpg').relative_to(ROOT / 'dist').as_posix())
     goals = json.loads((ROOT / "dist/goals.json").read_text())
     assert goals == [{"line": n, "goal": (ROOT / f"line-{n}/GOAL.md").read_text().strip()}
                      for n in range(1, 5)]
     gallery = Gallery()
     gallery.feed((ROOT / "dist/index.html").read_text())
     assert gallery.sections == folders and not gallery.dependencies
-    assert len(gallery.images) == len(gallery.records) == 105
-    expected = [f"{folder}/{number:02}.json" for folder in folders
-                for number in [1] + list(range(21, 1, -1))]
     assert gallery.records == expected
+    assert gallery.images == expected_images
     for href in gallery.records:
         assert (ROOT / "dist" / href).is_file()
     oversized = [str(p.relative_to(ROOT)) for folder in ("gathering", "shared", "dist")
                  for p in (ROOT / folder).rglob("*") if p.is_file() and p.stat().st_size > 100_000]
     assert not oversized, oversized
     assert not list((ROOT / "dist").rglob("__pycache__"))
+    baseline = json.loads((ROOT / 'gathering/line-source-hashes.json').read_text())
+    actual = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
+              for n in range(1, 5) for p in (ROOT / f'line-{n}').rglob('*') if p.is_file()}
+    assert actual == baseline, 'line folders changed'
+    for entry in json.loads((ROOT / 'shared/payment-evidence/provenance.json').read_text()):
+        source = ROOT / entry['source']
+        copied = ROOT / 'shared/payment-evidence' / entry['copy']
+        assert hashlib.sha256(source.read_bytes()).hexdigest() == entry['sha256']
+        assert hashlib.sha256(copied.read_bytes()).hexdigest() == entry['copiedSha256']
+        if entry['adaptation'] == 'none; byte-for-byte source copy':
+            assert source.read_bytes() == copied.read_bytes()
+    review = json.loads((ROOT / 'gathering/wall-review-02.json').read_text())
+    assert review['wallSha256'] == hashlib.sha256(wall.read_bytes()).hexdigest()
+    assert review['changedPixels'] + review['unchangedPixels'] == png['width'] * png['height']
+    assert review['unmetVisualRequirements'] == []
+    assert review['reviewStatus'] == 'visually inspected full PNG and decoded JPEG'
     print(json.dumps({"valid": True, "wall": png, "preview": jpeg,
-                      "paintedRecords": 5, "placeholderRecords": 100,
+                      "paintedRecords": painted_count, "placeholderRecords": pending_count,
                       "galleryRecords": len(gallery.records),
                       "unmetVisualRequirements": [],
+                      "lineFoldersUnchanged": True,
+                      "vendoredProvenanceVerified": True,
                       "visualReview": "Recorded separately in REPORT.md; this checker validates structure, not appearance."}, indent=2))
 
 

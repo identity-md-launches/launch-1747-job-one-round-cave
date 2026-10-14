@@ -1,0 +1,37 @@
+[
+  {
+    "source": "line-1/tools/bounded-rpc-snapshot/snapshot.py",
+    "copy": "vendor/rpc_snapshot.py",
+    "sha256": "341ffcfb225cacb4f15770c1ecca095ed4962078652a965709492aeb5a371d66",
+    "copiedSha256": "2f8291af470d2a74c8118c2853e9c9e90935b143d792dd22c59da7d3d9bd7df9",
+    "adaptation": "Retain bounded RPC functions; remove arbitrary filesystem verification/output functions and CLI."
+  },
+  {
+    "source": "line-2/tools/json-contract/check.py",
+    "copy": "vendor/json_contract.py",
+    "sha256": "c7f8ef3761069ce6778917c7b16d8fc5ed99a76b1aab50da3c9bdd3dc2e43a0c",
+    "copiedSha256": "c7f8ef3761069ce6778917c7b16d8fc5ed99a76b1aab50da3c9bdd3dc2e43a0c",
+    "adaptation": "none; byte-for-byte source copy"
+  },
+  {
+    "source": "line-3/tools/settlement-check/settlement.py",
+    "copy": "vendor/settlement-check/settlement.py",
+    "sha256": "7b43f899f0f393cf334a8218313861db9a76543ff6096c169d235fe71f2cd4df",
+    "copiedSha256": "b7c71f68f823e547100f8208c4420d5a8902a190f10829199a008f35e618509d",
+    "adaptation": "Disable the direct ancestor RPC transport; bridge capture supplies the bounded proxy-free line 1 transport."
+  },
+  {
+    "source": "line-3/tools/payment-witness/witness.py",
+    "copy": "vendor/payment-witness/witness.py",
+    "sha256": "5bd6ab995e8f565404f4a1cfdb543ca7138d0df7febde8f906f3ad8a233261c5",
+    "copiedSha256": "5bd6ab995e8f565404f4a1cfdb543ca7138d0df7febde8f906f3ad8a233261c5",
+    "adaptation": "none; byte-for-byte source copy"
+  },
+  {
+    "source": "line-4/tools/typed-digest/typed_digest.py",
+    "copy": "vendor/typed_digest.py",
+    "sha256": "a6903cd67fd837f18be3546721830228646df5e144c04f7a5cbd40c5f21854d9",
+    "copiedSha256": "a6903cd67fd837f18be3546721830228646df5e144c04f7a5cbd40c5f21854d9",
+    "adaptation": "none; byte-for-byte source copy"
+  }
+]

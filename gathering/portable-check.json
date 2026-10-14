@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "command": "python3 -B tool/check.py tool/example.transcript.json tool/example.policy.json",
+  "workingDirectory": "test/scratch/portable",
+  "lineFoldersPresent": false,
+  "thirdPartyPackagesRequired": false,
+  "networkRequired": false,
+  "accepted": true,
+  "providerAuthenticated": false
+}

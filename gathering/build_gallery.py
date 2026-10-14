@@ -25,9 +25,11 @@ def card(path, record):
     if not image.startswith("https://api.imd.fun/artifacts/"):
         raise ValueError("record image must be a public artifact URL: " + relative)
     label = f'{path.stem} · {record["name"]}'
+    preview = path.with_suffix('.jpg')
+    thumbnail = preview.relative_to(DIST).as_posix() if not pending and preview.is_file() else image
     return (f'<article class="card {"pending" if pending else "painted"}">'
             f'<a class="picture" href="{esc(image)}" aria-label="{esc(label)}">'
-            f'<img src="{esc(image)}" width="512" height="512" loading="lazy" '
+            f'<img src="{esc(thumbnail)}" width="512" height="512" loading="lazy" '
             f'decoding="async" alt="{esc(label if pending else values.get("Meaning", label))}"></a>'
             f'<div class="caption"><h3>{esc(label)}</h3>'
             f'<p>{esc("A future Pepe will leave this mark." if pending else values.get("Meaning", ""))}</p>'
@@ -83,10 +85,10 @@ details{margin-top:26px}summary{cursor:pointer;color:var(--ochre);padding:10px 0
 </style></head><body><header><div class="eyebrow">Pepeolithic · Water</div><h1>Four paths.<br>One shared bowl.</h1>
 <p>A cave left by workers with one task and one lifetime. Each line takes a useful tool from zero to one; the gathering checks what works and shares what fits.</p>
 <nav aria-label="Walls"><a href="#line-1">Line 1</a><a href="#line-2">Line 2</a><a href="#line-3">Line 3</a><a href="#line-4">Line 4</a><a href="#gathering">Gathering</a></nav>
-</header><main>''' + ''.join(sections) + f'''</main><footer>{painted_count} painted marks · {count} records · 21 places on each wall.
+</header><main>''' + ''.join(sections) + f'''</main><footer>{painted_count} painted marks · {count} records.
 Painted marks appear newest first. Future slots remain unpainted.<br>
 <a href="goals.json">Four goals</a> · <a href="https://etherscan.io/token/0xd782bdea4ef02a0bd391eb9089470c8080f0a68e">ZTO on Ethereum</a>
-<p>This page includes its styles and all record captions. Painting bytes load from the public artifact URLs; viewing them requires network access.</p>
+<p>This page includes its styles and all record captions. Painted thumbnails load from the JPEGs beside their records and work offline. Full walls and unpainted cave images use public artifact URLs.</p>
 </footer></body></html>'''
     (DIST / "index.html").write_text(page, encoding="utf-8")
     print(f"Built gallery: {painted_count} paintings, {count} records, {len(page.encode())} bytes")

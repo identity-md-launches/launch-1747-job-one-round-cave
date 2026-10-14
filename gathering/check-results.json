@@ -1,0 +1,93 @@
+[
+  {
+    "command": "python3 -B line-1/tools/bounded-rpc-snapshot/snapshot.py --verify line-1/tools/bounded-rpc-snapshot/sample-zto-supply.json",
+    "exitCode": 0,
+    "seconds": 0.108,
+    "stdout": "valid snapshot: eth_call c246b76a086839ea8ee44de616317a5a95acb90bda1a5186275df5d2a765764e\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 -B line-2/tools/json-contract/check.py line-2/tools/json-contract/report.contract.json line-2/tools/json-contract/report.example.json",
+    "exitCode": 0,
+    "seconds": 0.065,
+    "stdout": "{\n  \"valid\": true,\n  \"errors\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 -B line-2/tools/json-contract/test_check.py",
+    "exitCode": 0,
+    "seconds": 0.24,
+    "stdout": "",
+    "stderr": "test_boundaries (__main__.Contracts.test_boundaries) ... ok\ntest_cli_success_and_input_error (__main__.Contracts.test_cli_success_and_input_error) ... ok\ntest_enum_boolean_not_number (__main__.Contracts.test_enum_boolean_not_number) ... ok\ntest_example_report (__main__.Contracts.test_example_report) ... ok\ntest_invalid_contracts_fail_closed (__main__.Contracts.test_invalid_contracts_fail_closed) ... ok\ntest_lengths_and_pattern (__main__.Contracts.test_lengths_and_pattern) ... ok\ntest_pointer_escaping (__main__.Contracts.test_pointer_escaping) ... ok\ntest_real_existing_record (__main__.Contracts.test_real_existing_record) ... ok\ntest_refuses_outside_and_hidden_paths (__main__.Contracts.test_refuses_outside_and_hidden_paths) ... ok\ntest_types (__main__.Contracts.test_types) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.150s\n\nOK\n"
+  },
+  {
+    "command": "python3 -B line-2/tools/ordered-deliverables/check.py line-2/tools/ordered-deliverables/handoff.contract.json line-2/tools/ordered-deliverables/handoff.example.json",
+    "exitCode": 0,
+    "seconds": 0.072,
+    "stdout": "{\n  \"valid\": true,\n  \"errors\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 -B line-2/tools/ordered-deliverables/test_ordered.py",
+    "exitCode": 0,
+    "seconds": 0.164,
+    "stdout": "",
+    "stderr": "test_bad_contracts (__main__.Ordered.test_bad_contracts) ... ok\ntest_cli (__main__.Ordered.test_cli) ... ok\ntest_empty_prefix_retains_items (__main__.Ordered.test_empty_prefix_retains_items) ... ok\ntest_error_pointer (__main__.Ordered.test_error_pointer) ... ok\ntest_handoff (__main__.Ordered.test_handoff) ... ok\ntest_items_checks_only_tail (__main__.Ordered.test_items_checks_only_tail) ... ok\ntest_prefix_does_not_require_presence (__main__.Ordered.test_prefix_does_not_require_presence) ... ok\ntest_real_inherited_record (__main__.Ordered.test_real_inherited_record) ... ok\ntest_trait_value_and_order (__main__.Ordered.test_trait_value_and_order) ... ok\ntest_unconstrained_tail (__main__.Ordered.test_unconstrained_tail) ... ok\ntest_uniqueness_nested (__main__.Ordered.test_uniqueness_nested) ... ok\ntest_uniqueness_numeric_and_boolean (__main__.Ordered.test_uniqueness_numeric_and_boolean) ... ok\ntest_uniqueness_optional (__main__.Ordered.test_uniqueness_optional) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 0.069s\n\nOK\n"
+  },
+  {
+    "command": "python3 -B -m unittest discover -s line-3/tools/settlement-check -p test_*.py -v",
+    "exitCode": 0,
+    "seconds": 0.132,
+    "stdout": "",
+    "stderr": "test_absent_receipt (test_settlement.SettlementTests.test_absent_receipt) ... ok\ntest_bounded_empty_discovery (test_settlement.SettlementTests.test_bounded_empty_discovery) ... ok\ntest_discovery_uses_real_zto_filter (test_settlement.SettlementTests.test_discovery_uses_real_zto_filter) ... ok\ntest_finalized_success (test_settlement.SettlementTests.test_finalized_success) ... ok\ntest_inclusion_counts_as_one (test_settlement.SettlementTests.test_inclusion_counts_as_one) ... ok\ntest_invalid_receipt_status (test_settlement.SettlementTests.test_invalid_receipt_status) ... ok\ntest_no_write_rpc_method_available (test_settlement.SettlementTests.test_no_write_rpc_method_available) ... ok\ntest_quantity_and_hash_validation (test_settlement.SettlementTests.test_quantity_and_hash_validation) ... ok\ntest_receipt_ahead_of_sampled_head (test_settlement.SettlementTests.test_receipt_ahead_of_sampled_head) ... ok\ntest_removed_logs_not_discovered (test_settlement.SettlementTests.test_removed_logs_not_discovered) ... ok\ntest_reorg_and_orphan_fail_closed (test_settlement.SettlementTests.test_reorg_and_orphan_fail_closed) ... ok\ntest_revert_never_settles (test_settlement.SettlementTests.test_revert_never_settles) ... ok\ntest_unfinalized_policy (test_settlement.SettlementTests.test_unfinalized_policy) ... ok\ntest_unsupported_finality_is_unknown (test_settlement.SettlementTests.test_unsupported_finality_is_unknown) ... ok\ntest_wrong_returned_block_number (test_settlement.SettlementTests.test_wrong_returned_block_number) ... ok\ntest_wrong_transaction_and_chain (test_settlement.SettlementTests.test_wrong_transaction_and_chain) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.003s\n\nOK\n"
+  },
+  {
+    "command": "python3 -B line-3/tools/payment-witness/witness.py --replay line-3/tools/payment-witness/live-evidence.json",
+    "exitCode": 0,
+    "seconds": 0.1,
+    "stdout": "{\n  \"chainId\": 1,\n  \"transactionHash\": \"0xc4ca304c305cae326cab066639ab2156412eee7f5f774b41a2a136369f817ef7\",\n  \"head\": {\n    \"number\": 26191361,\n    \"hash\": \"0xf72e441b763997bff34ccd33882468ffb95526321b16582c972e73d5f4484eab\"\n  },\n  \"policy\": {\n    \"minimumConfirmations\": 12,\n    \"requireFinalized\": true\n  },\n  \"settled\": true,\n  \"inclusion\": {\n    \"number\": 26190898,\n    \"hash\": \"0x92fd5a2a4e348630cc5e93252669b754760ae4e818a976dd00db145e30ddc8dd\"\n  },\n  \"execution\": \"succeeded\",\n  \"finalizedHead\": {\n    \"number\": 26191269,\n    \"hash\": \"0xc492993fd90ab9821b6b1124f9f844a8f2230cfc74f45c76767a773359bb2db7\"\n  },\n  \"confirmations\": 464,\n  \"finalized\": true,\n  \"state\": \"settled\",\n  \"reason\": \"Execution and canonical-chain evidence meet the selected policy.\",\n  \"accepted\": true,\n  \"paymentPolicy\": {\n    \"token\": \"ZTO\",\n    \"contract\": \"0xd782bdea4ef02a0bd391eb9089470c8080f0a68e\",\n    \"recipient\": \"0x2d30e495a15f2657d57c3e2caa08b06415c26cbf\",\n    \"minimumRaw\": \"166357571280020680094504\",\n    \"measure\": \"incoming minus outgoing Transfer amounts in this receipt\"\n  },\n  \"transferEvidence\": {\n    \"incomingRaw\": \"166357571280020680094504\",\n    \"outgoingRaw\": \"0\",\n    \"netRaw\": \"166357571280020680094504\",\n    \"events\": [\n      {\n        \"from\": \"0x000000000004444c5dc75cb358380d2e3de08a90\",\n        \"to\": \"0x2d30e495a15f2657d57c3e2caa08b06415c26cbf\",\n        \"raw\": \"166357571280020680094504\",\n        \"logIndex\": 632\n      }\n    ]\n  },\n  \"paymentState\": \"verified\",\n  \"evidenceMode\": \"offline historical RPC observations, not current chain evidence\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 -B -m unittest discover -s line-3/tools/payment-witness -p test_*.py -v",
+    "exitCode": 0,
+    "seconds": 0.136,
+    "stdout": "",
+    "stderr": "test_aggregate_and_net_outgoing (test_witness.WitnessTests.test_aggregate_and_net_outgoing) ... ok\ntest_duplicate_indices_refused (test_witness.WitnessTests.test_duplicate_indices_refused) ... ok\ntest_exact_threshold_and_shortfall (test_witness.WitnessTests.test_exact_threshold_and_shortfall) ... ok\ntest_invalid_policy (test_witness.WitnessTests.test_invalid_policy) ... ok\ntest_log_anchor_and_removed_flags (test_witness.WitnessTests.test_log_anchor_and_removed_flags) ... ok\ntest_no_file_outside_workspace (test_witness.WitnessTests.test_no_file_outside_workspace) ... ok\ntest_nonstandard_transfer_encoding (test_witness.WitnessTests.test_nonstandard_transfer_encoding) ... ok\ntest_pass_through_and_self_transfer_do_not_pay (test_witness.WitnessTests.test_pass_through_and_self_transfer_do_not_pay) ... ok\ntest_real_saved_evidence_replays_and_tampered_anchor_fails (test_witness.WitnessTests.test_real_saved_evidence_replays_and_tampered_anchor_fails) ... ok\ntest_reorg_between_settlement_and_payment (test_witness.WitnessTests.test_reorg_between_settlement_and_payment) ... ok\ntest_settlement_gates_payment (test_witness.WitnessTests.test_settlement_gates_payment) ... ok\ntest_transcript_mismatch_and_truncation (test_witness.WitnessTests.test_transcript_mismatch_and_truncation) ... ok\ntest_uint256_maximum_without_float (test_witness.WitnessTests.test_uint256_maximum_without_float) ... ok\ntest_wrong_recipient_and_token (test_witness.WitnessTests.test_wrong_recipient_and_token) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 0.007s\n\nOK\n"
+  },
+  {
+    "command": "python3 -B line-4/tools/typed-digest/typed_digest.py line-4/tools/typed-digest/zto-example.json --expect 0xc292388738e2cf2c7f57b9b8926821aff508ed38c1b355020cc7dc459dbbb8cb",
+    "exitCode": 0,
+    "seconds": 0.066,
+    "stdout": "{\n  \"primaryType\": \"TokenNote\",\n  \"typeEncoding\": \"TokenNote(address token,string note)\",\n  \"domainSeparator\": \"0x98be86261bd0010c597bf23a5eb52aa17f415c77bd5493d6498df24abea6bfe3\",\n  \"messageHash\": \"0x5485993d563b612ac2de70fa01293d89acf59096e16e45e7688b442f7418da2e\",\n  \"digest\": \"0xc292388738e2cf2c7f57b9b8926821aff508ed38c1b355020cc7dc459dbbb8cb\",\n  \"matchesExpected\": true\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 -B -m unittest discover -s test/scratch/typed-digest -p test_*.py -v",
+    "exitCode": 0,
+    "seconds": 0.577,
+    "stdout": "",
+    "stderr": "test_bad_unicode_and_bad_json (test_bounded_input.BoundedInputTests.test_bad_unicode_and_bad_json) ... ok\ntest_brackets_and_escaped_quotes_in_strings_do_not_count (test_bounded_input.BoundedInputTests.test_brackets_and_escaped_quotes_in_strings_do_not_count) ... ok\ntest_byte_limit_at_boundary (test_bounded_input.BoundedInputTests.test_byte_limit_at_boundary) ... ok\ntest_cli_match_and_mismatch (test_bounded_input.BoundedInputTests.test_cli_match_and_mismatch) ... ok\ntest_cli_rejection_no_traceback_or_success_output (test_bounded_input.BoundedInputTests.test_cli_rejection_no_traceback_or_success_output) ... ok\ntest_cyclic_api_values_and_nonstring_keys_rejected (test_bounded_input.BoundedInputTests.test_cyclic_api_values_and_nonstring_keys_rejected) ... ok\ntest_depth_scanned_before_decoder (test_bounded_input.BoundedInputTests.test_depth_scanned_before_decoder) ... ok\ntest_duplicate_keys_at_any_depth (test_bounded_input.BoundedInputTests.test_duplicate_keys_at_any_depth) ... ok\ntest_example_unchanged_and_absolute_path_supported (test_bounded_input.BoundedInputTests.test_example_unchanged_and_absolute_path_supported) ... ok\ntest_fifo_refused_without_blocking (test_bounded_input.BoundedInputTests.test_fifo_refused_without_blocking) ... ok\ntest_file_and_directory_symlinks_rejected (test_bounded_input.BoundedInputTests.test_file_and_directory_symlinks_rejected) ... ok\ntest_hidden_paths_rejected (test_bounded_input.BoundedInputTests.test_hidden_paths_rejected) ... ok\ntest_node_and_api_text_bounds (test_bounded_input.BoundedInputTests.test_node_and_api_text_bounds) ... ok\ntest_nonfinite_float_and_exponent_rejected (test_bounded_input.BoundedInputTests.test_nonfinite_float_and_exponent_rejected) ... ok\ntest_outside_and_parent_paths_rejected_without_opening (test_bounded_input.BoundedInputTests.test_outside_and_parent_paths_rejected_without_opening) ... ok\ntest_oversize_file_rejected_before_read (test_bounded_input.BoundedInputTests.test_oversize_file_rejected_before_read) ... ok\ntest_bytes_address_boolean_encoding (test_bounded_input.EncodingBoundaryTests.test_bytes_address_boolean_encoding) ... ok\ntest_empty_dynamic_and_nested_fixed_arrays (test_bounded_input.EncodingBoundaryTests.test_empty_dynamic_and_nested_fixed_arrays) ... ok\ntest_encoder_owns_schema_snapshot_when_caching (test_bounded_input.EncodingBoundaryTests.test_encoder_owns_schema_snapshot_when_caching) ... ok\ntest_invalid_types_and_deep_array_types_rejected (test_bounded_input.EncodingBoundaryTests.test_invalid_types_and_deep_array_types_rejected) ... ok\ntest_recursive_type_with_finite_values (test_bounded_input.EncodingBoundaryTests.test_recursive_type_with_finite_values) ... ok\ntest_signed_and_unsigned_limits_and_sign_extension (test_bounded_input.EncodingBoundaryTests.test_signed_and_unsigned_limits_and_sign_extension) ... ok\ntest_type_field_order_changes_digest (test_bounded_input.EncodingBoundaryTests.test_type_field_order_changes_digest) ... ok\ntest_types_and_fields_bounded (test_bounded_input.EncodingBoundaryTests.test_types_and_fields_bounded) ... ok\ntest_dependency_order_and_arrays (test_typed_digest.DigestTests.test_dependency_order_and_arrays) ... ok\ntest_ether_mail_vector (test_typed_digest.DigestTests.test_ether_mail_vector) ... ok\ntest_keccak_vectors (test_typed_digest.DigestTests.test_keccak_vectors) ... ok\ntest_rejects_ambiguous_or_invalid_values (test_typed_digest.DigestTests.test_rejects_ambiguous_or_invalid_values) ... ok\n\n----------------------------------------------------------------------\nRan 28 tests in 0.474s\n\nOK\n"
+  },
+  {
+    "command": "python3 -B shared/rpc-evidence/test_bridge.py",
+    "exitCode": 0,
+    "seconds": 0.193,
+    "stdout": "",
+    "stderr": "test_cli_works_without_network (__main__.BridgeTests.test_cli_works_without_network) ... ok\ntest_live_capture_matches_mainnet_contract (__main__.BridgeTests.test_live_capture_matches_mainnet_contract) ... ok\ntest_read_adapter_rejects_credential_url (__main__.BridgeTests.test_read_adapter_rejects_credential_url) ... ok\ntest_read_adapter_rejects_sending_before_network (__main__.BridgeTests.test_read_adapter_rejects_sending_before_network) ... ok\ntest_rpc_error_is_not_successful_evidence (__main__.BridgeTests.test_rpc_error_is_not_successful_evidence) ... ok\ntest_wrong_chain_envelope_method_and_http (__main__.BridgeTests.test_wrong_chain_envelope_method_and_http) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.072s\n\nOK\n"
+  },
+  {
+    "command": "python3 -B shared/rpc-evidence/verify.py shared/rpc-evidence/chain-id.snapshot.json",
+    "exitCode": 0,
+    "seconds": 0.063,
+    "stdout": "{\n  \"valid\": true,\n  \"errors\": [],\n  \"scope\": \"Ethereum mainnet chain-ID snapshot structure; not provider authenticity or current chain state\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 -B shared/payment-evidence/test_evidence.py",
+    "exitCode": 0,
+    "seconds": 0.584,
+    "stdout": "",
+    "stderr": "test_boolean_version_and_confirmations_rejected (__main__.EvidenceTests.test_boolean_version_and_confirmations_rejected) ... ok\ntest_capture_emits_replayable_real_transcript (__main__.EvidenceTests.test_capture_emits_replayable_real_transcript) ... ok\ntest_cli_success_and_digest_mismatch (__main__.EvidenceTests.test_cli_success_and_digest_mismatch) ... ok\ntest_expected_digest_binds_other_receipt_fields (__main__.EvidenceTests.test_expected_digest_binds_other_receipt_fields) ... ok\ntest_extra_or_missing_or_reordered_reads_rejected (__main__.EvidenceTests.test_extra_or_missing_or_reordered_reads_rejected) ... ok\ntest_independent_policy_mismatch (__main__.EvidenceTests.test_independent_policy_mismatch) ... ok\ntest_json_key_order_does_not_change_commitment (__main__.EvidenceTests.test_json_key_order_does_not_change_commitment) ... ok\ntest_policy_cannot_be_lowered_in_transcript (__main__.EvidenceTests.test_policy_cannot_be_lowered_in_transcript) ... ok\ntest_public_transport_rejects_write_before_network (__main__.EvidenceTests.test_public_transport_rejects_write_before_network) ... ok\ntest_read_fields_and_methods_strict (__main__.EvidenceTests.test_read_fields_and_methods_strict) ... ok\ntest_real_zto_payment_and_digest (__main__.EvidenceTests.test_real_zto_payment_and_digest) ... ok\ntest_shared_settlement_has_no_direct_network_transport (__main__.EvidenceTests.test_shared_settlement_has_no_direct_network_transport) ... ok\ntest_shortfall_is_valid_evidence_but_not_accepted (__main__.EvidenceTests.test_shortfall_is_valid_evidence_but_not_accepted) ... ok\ntest_wrong_anchor_fails (__main__.EvidenceTests.test_wrong_anchor_fails) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 0.381s\n\nOK\n"
+  }
+]

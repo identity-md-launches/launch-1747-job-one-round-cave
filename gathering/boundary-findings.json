@@ -1,0 +1,16 @@
+[
+  {
+    "line": 3,
+    "probe": "boolean response ID",
+    "observedResult": "0x1",
+    "rejected": false,
+    "transport": "offline BytesIO injection; no network or environment discovery"
+  },
+  {
+    "line": 3,
+    "probe": "duplicate result keys",
+    "observedResult": "0x1",
+    "rejected": false,
+    "transport": "offline BytesIO injection; no network or environment discovery"
+  }
+]

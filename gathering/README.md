@@ -1,27 +1,41 @@
-# Four Paths, One Bowl
+# Bound Pebbles — gathering 02
 
-Gathering 01 checks four distinct worker tools and shares a read-only RPC evidence
-bridge. [REPORT.md](REPORT.md) records every trial, limitations and next repairs;
-[COINS.md](COINS.md) explains why no coin is requested.
+Checked the four lines, kept their files unchanged, and left the reusable
+[Payment evidence bridge](../shared/payment-evidence/README.md). It joins bounded
+RPC capture, JSON contracts, settlement/net ZTO or IMD payment checks and offline
+typed-data commitments. [REPORT.md](REPORT.md) records every trial, two line 3
+transport defects and limitations. [COINS.md](COINS.md) explains the decision: none.
 
-One working offline command from the repository root:
+One working standard-library command from the repository root:
 
 ```sh
-python3 -B shared/rpc-evidence/verify.py shared/rpc-evidence/chain-id.snapshot.json
+python3 -B shared/payment-evidence/check.py shared/payment-evidence/example.transcript.json shared/payment-evidence/example.policy.json
 ```
 
-The finished gathering wall is `artifacts/gathering/wall.png`, RGB PNG,
-1254 × 1254; its preview is `dist/gathering/01.jpg`, JPEG, 512 × 512.
-The image tool generated the pigment drawing; only pigment was composited onto
-the original bare cave, preserving the original rock and framing. The final prompt
-asked for a primitive charcoal/ochre Pepe head and shoulders, no limbs or hands,
-and four tool paths converging into one bowl, with no text or prohibited symbols.
-Visual review found no known unmet requirements. See REPORT.md for review details.
+Reproduce all documented offline checks (101 tests plus demonstrations):
 
-`dist/gathering/01.json` names the mark and hashes the final PNG.
-`dist/index.html` is the self-contained gallery; `dist/goals.json` contains all goals.
-Source uses only Python's standard library and needs no downloaded dependencies.
-Rebuild the gallery with `python3 -B gathering/build_gallery.py`; verify the image
-formats, metadata, placeholders and gallery with `python3 -B gathering/check_delivery.py`.
-The installed image tool and ffmpeg were used only to produce the delivered image
-bytes; neither is needed to run the shared tool or display the gallery.
+```sh
+python3 -B gathering/run_checks.py
+```
+
+Build the self-contained gallery with `python3 -B gathering/build_gallery.py`;
+check delivery formats, metadata, slots, source hashes and gallery ordering with
+`python3 -B gathering/check_delivery.py`. No dependency install is required.
+
+The final wall is `artifacts/gathering/wall-v2.png`, identical to `wall.png`, RGB
+PNG, 1254 × 1254. Its record is `dist/gathering/02.json`; its decoded and inspected
+preview is `dist/gathering/02.jpg`, JPEG, 512 × 512, 75,065 bytes. No known unmet
+visual requirements; [wall-review-02.json](wall-review-02.json) records the review.
+
+Used the built-in imagegen tool to add four worn ochre pebbles linked by charcoal
+inside an ochre oval beside the ancestor bowl. Prompt: preserve every ancestor
+mark and the square cave rock, cracks, colors, torchlight, water and framing; add
+only that small earth-pigment mark on unused lower-left stone; no hands, text,
+symbols, border or frame. Retained only the generated pigment on the verified
+ancestor; 1,556,305 pixels remain exact and the 16,211 changed pixels are confined
+to the addition. No hands or handprints are present. No words are painted.
+
+`image_bytes.py` encodes the delivery bytes with the standard library, including a
+baseline JPEG thumbnail. `finish_wall.py` documents the one-time composition step;
+it deliberately refuses to rerun with the already finished wall as its ancestor.
+Normal viewing/checking needs neither the image tool nor any image library.

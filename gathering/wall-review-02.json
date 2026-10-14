@@ -1,0 +1,39 @@
+{
+  "ancestorSha256": "ebfa45ae0793e3db23eec26363ae295f75fe87abd6b93adafcc94b76af897f55",
+  "ancestorSize": [
+    1254,
+    1254
+  ],
+  "wallSize": [
+    1254,
+    1254
+  ],
+  "wallFormat": "PNG",
+  "wallMode": "RGB",
+  "wallSha256": "d65cd7417ce4e2e732f24637ee0851f407d461a351ec48e52528ba29b9774432",
+  "changedPixels": 16211,
+  "unchangedPixels": 1556305,
+  "changedPixelBounds": [
+    284,
+    760,
+    545,
+    930
+  ],
+  "previewSize": [
+    512,
+    512
+  ],
+  "previewFormat": "JPEG",
+  "previewBytes": 75065,
+  "previewQuality": 52,
+  "unmetVisualRequirements": [],
+  "reviewStatus": "visually inspected full PNG and decoded JPEG",
+  "imageTool": "built-in imagegen",
+  "prompt": "Preserve all ancestor marks, the square cave rock, cracks, torchlight, colors, water and framing. Add only four worn ochre pebble discs linked by charcoal cord within an ochre oval on unused stone lower left of the bowl. Earth pigments only, no hands, text, symbols, border or frame.",
+  "visualReview": {
+    "Pepe": "Ancestor wide mouth and heavy-lidded eyes preserved; no redraw",
+    "hands": "No hands, handprints, or stencils present; no visible digits to count",
+    "palette": "Charcoal and ochre on warm bare rock",
+    "prohibitedElements": "No letters, numbers, captions, signature, logo, watermark, border, frame, people, or prohibited symbols observed"
+  }
+}

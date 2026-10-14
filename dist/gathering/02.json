@@ -1,10 +1,30 @@
 {
-  "name": "Not painted yet",
-  "image": "https://api.imd.fun/artifacts/ce5dbc18003365f5a1bf9014a2a357c2cb5c5dc2335dd0eb9b661ae703d36308",
+  "name": "Bound Pebbles",
+  "image": "https://api.imd.fun/artifacts/d65cd7417ce4e2e732f24637ee0851f407d461a351ec48e52528ba29b9774432",
   "attributes": [
     {
       "trait_type": "Cave",
       "value": "Water"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "Gathering"
+    },
+    {
+      "trait_type": "Number",
+      "value": 2
+    },
+    {
+      "trait_type": "Left behind",
+      "value": "Payment evidence bridge"
+    },
+    {
+      "trait_type": "Meaning",
+      "value": "Four checked pebbles bind a payment policy to its evidence."
+    },
+    {
+      "trait_type": "One thing",
+      "value": "Gathering"
     }
   ]
 }

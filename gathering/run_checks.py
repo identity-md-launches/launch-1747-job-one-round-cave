@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+"""Run every line's documented offline check without modifying line folders."""
+import json
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import time
+
+ROOT = Path(__file__).resolve().parent.parent
+
+
+def main():
+    if Path.cwd().resolve() != ROOT:
+        raise SystemExit('Run this command from the repository root')
+    scratch = ROOT / 'test/scratch'
+    scratch.mkdir(parents=True, exist_ok=True)
+    # Line 4's tests create/remove fixtures beside their source. Run an exact
+    # copy in scratch so even temporary line-folder modifications are avoided.
+    shutil.copytree(ROOT / 'line-4/tools/typed-digest', scratch / 'typed-digest', dirs_exist_ok=True)
+    commands = [
+        ['line-1/tools/bounded-rpc-snapshot/snapshot.py', '--verify', 'line-1/tools/bounded-rpc-snapshot/sample-zto-supply.json'],
+        ['line-2/tools/json-contract/check.py', 'line-2/tools/json-contract/report.contract.json', 'line-2/tools/json-contract/report.example.json'],
+        ['line-2/tools/json-contract/test_check.py'],
+        ['line-2/tools/ordered-deliverables/check.py', 'line-2/tools/ordered-deliverables/handoff.contract.json', 'line-2/tools/ordered-deliverables/handoff.example.json'],
+        ['line-2/tools/ordered-deliverables/test_ordered.py'],
+        ['-m', 'unittest', 'discover', '-s', 'line-3/tools/settlement-check', '-p', 'test_*.py', '-v'],
+        ['line-3/tools/payment-witness/witness.py', '--replay', 'line-3/tools/payment-witness/live-evidence.json'],
+        ['-m', 'unittest', 'discover', '-s', 'line-3/tools/payment-witness', '-p', 'test_*.py', '-v'],
+        ['line-4/tools/typed-digest/typed_digest.py', 'line-4/tools/typed-digest/zto-example.json', '--expect', '0xc292388738e2cf2c7f57b9b8926821aff508ed38c1b355020cc7dc459dbbb8cb'],
+        ['-m', 'unittest', 'discover', '-s', 'test/scratch/typed-digest', '-p', 'test_*.py', '-v'],
+        ['shared/rpc-evidence/test_bridge.py'],
+        ['shared/rpc-evidence/verify.py', 'shared/rpc-evidence/chain-id.snapshot.json'],
+        ['shared/payment-evidence/test_evidence.py']]
+    results = []
+    for args in commands:
+        command = [sys.executable, '-B', *args]
+        started = time.monotonic()
+        result = subprocess.run(command, capture_output=True, text=True, timeout=45)
+        results.append({'command': ' '.join(['python3', '-B', *args]),
+                        'exitCode': result.returncode, 'seconds': round(time.monotonic()-started, 3),
+                        'stdout': result.stdout, 'stderr': result.stderr})
+        print('PASS' if result.returncode == 0 else 'FAIL', ' '.join(args), flush=True)
+    (ROOT / 'gathering/check-results.json').write_text(json.dumps(results, indent=2)+'\n')
+    return 0 if all(r['exitCode'] == 0 for r in results) else 1
+
+
+if __name__ == '__main__':
+    sys.exit(main())
