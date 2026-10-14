@@ -1,0 +1,40 @@
+{
+  "wall": {
+    "paths": [
+      "artifacts/line-3/wall.png",
+      "artifacts/line-3/wall-v2.png"
+    ],
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG",
+    "mode": "RGB",
+    "sha256": "dc0cbbc5d4bbd06d35ba5380e354447100bb5d7c8cdc16a1b3389ea86699f14d"
+  },
+  "preview": {
+    "path": "dist/line-3/22.jpg",
+    "width": 512,
+    "height": 512,
+    "format": "JPEG",
+    "bytes": 82444
+  },
+  "ancestorSha256": "b8ba68902a0de37fa7cfc2d5d7cb806f7389a5e83aff4bc41c5d77971d646d9f",
+  "changedPixels": 20784,
+  "unchangedPixels": 1551732,
+  "additionBounds": [
+    709,
+    350,
+    1062,
+    588
+  ],
+  "ancestorFigureAndStonesUnchanged": true,
+  "visualReview": "Opened and inspected the full finished wall. Existing recognizable Pepe and stones preserved; rough earth pigments, no text or prohibited imagery; zero visible hands or handprints. No unmet requirements observed locally.",
+  "unmetVisualRequirements": [],
+  "checks": {
+    "PNGAndJPEGDecode": true,
+    "recordShapeAndImageHash": true,
+    "oldRecordsAndGoalUnchanged": true,
+    "offlineReplayPassed": true,
+    "newTestsPassed": 14,
+    "ancestorTestsPassed": 16
+  }
+}
